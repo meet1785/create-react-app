@@ -131,6 +131,28 @@ if (
 }
 ```
 
+#### `checkEnvVariables(appSrc: string, isInteractive: boolean): boolean`
+
+Scans source code for `process.env.REACT_APP_*` references and validates that they are defined.<br>
+Prints helpful warnings for undefined variables, including suggestions for typos.<br>
+Only runs in development mode. Returns `true` to indicate non-blocking validation.
+
+```js
+var path = require('path');
+var checkEnvVariables = require('react-dev-utils/checkEnvVariables');
+
+// Check environment variables before starting dev server
+checkEnvVariables(path.resolve('src'), true);
+```
+
+Features:
+
+- Detects all `REACT_APP_*` environment variable references in `.js`, `.jsx`, `.ts`, and `.tsx` files
+- Warns about undefined variables with helpful error messages
+- Suggests corrections for potential typos using fuzzy matching
+- Excludes test files from validation
+- Can be disabled by setting `DISABLE_ENV_CHECK=true`
+
 #### `clearConsole(): void`
 
 Clears the console, hopefully in a cross-platform way.

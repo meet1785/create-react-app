@@ -17,6 +17,7 @@
   "files": [
     "browsersHelper.js",
     "chalk.js",
+    "checkEnvVariables.js",
     "checkRequiredFiles.js",
     "clearConsole.js",
     "crossSpawn.js",

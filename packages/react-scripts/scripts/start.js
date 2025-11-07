@@ -28,6 +28,7 @@ const webpack = require('webpack');
 const WebpackDevServer = require('webpack-dev-server');
 const clearConsole = require('react-dev-utils/clearConsole');
 const checkRequiredFiles = require('react-dev-utils/checkRequiredFiles');
+const checkEnvVariables = require('react-dev-utils/checkEnvVariables');
 const {
   choosePort,
   createCompiler,
@@ -50,6 +51,9 @@ const isInteractive = process.stdout.isTTY;
 if (!checkRequiredFiles([paths.appHtml, paths.appIndexJs])) {
   process.exit(1);
 }
+
+// Check for undefined environment variables in development
+checkEnvVariables(paths.appSrc, isInteractive);
 
 // Tools like Cloud9 rely on this.
 const DEFAULT_PORT = parseInt(process.env.PORT, 10) || 3000;

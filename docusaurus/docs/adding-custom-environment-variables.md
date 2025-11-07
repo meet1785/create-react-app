@@ -66,6 +66,38 @@ if (process.env.NODE_ENV !== 'production') {
 
 When you compile the app with `npm run build`, the minification step will strip out this condition, and the resulting bundle will be smaller.
 
+## Environment Variable Validation
+
+> Note: this feature is available with `react-scripts@5.1.0` and higher.
+
+When you run `npm start` in development mode, Create React App will automatically scan your source code for references to `process.env.REACT_APP_*` variables and check if they are defined in your `.env` files or environment. If you reference an environment variable that isn't defined, you'll see a helpful warning message:
+
+```
+Warning: The following environment variables are referenced in your code but not defined:
+
+  REACT_APP_API_URL
+    Did you mean REACT_APP_API_URI?
+
+To fix this, add the missing variables to your .env file or set them in your environment.
+For example, add this line to your .env file:
+
+  REACT_APP_API_URL=your_value_here
+
+Learn more: https://facebook.github.io/create-react-app/docs/adding-custom-environment-variables
+
+To disable this check, set DISABLE_ENV_CHECK=true in your environment.
+```
+
+This validation helps catch common mistakes such as:
+
+- **Typos in variable names** - The validator will suggest similar variable names if it detects a potential typo
+- **Forgotten `.env` entries** - Get immediate feedback when you reference a variable that hasn't been defined yet
+- **Case sensitivity issues** - Environment variable names are case-sensitive, and the validator helps identify mismatches
+
+The validation only runs during development (`npm start`) and won't affect your production builds. Test files (files ending in `.test.js`, `.test.jsx`, `.test.ts`, `.test.tsx`, or files in `__tests__` directories) are excluded from validation since they often use mocked environment variables.
+
+You can disable this validation by setting `DISABLE_ENV_CHECK=true` in your environment or `.env` file.
+
 ## Referencing Environment Variables in the HTML
 
 > Note: this feature is available with `react-scripts@0.9.0` and higher.
